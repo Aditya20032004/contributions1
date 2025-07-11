@@ -51,8 +51,8 @@ Insertion sort:
 
 ##   Day2
 
-###Merge sort:
-            class Solution {
+### Merge sort:
+ class Solution {
   public:
     void mergeSort(vector<int> &arr, int l, int r) {
         // code here
@@ -97,7 +97,7 @@ Insertion sort:
 ## DAY3 
 
 
-###(Quick Sort)
+### (Quick Sort)
 
       class Solution {
   public:
@@ -145,7 +145,7 @@ Insertion sort:
 };
 
 
-###Largest number in an array
+### Largest number in an array
 class Solution {
   public:
     int largest(vector<int> &arr) {
