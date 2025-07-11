@@ -1,6 +1,6 @@
 # DSA
-DAY1- selection sort
-      class Solution {
+## DAY1- selection sort
+class Solution {
       public:
           vector<int> selectionSort(vector<int>& nums) {
               for (int i = 0; i<nums.size()-1; i++){
@@ -49,7 +49,7 @@ Insertion sort:
 
 
 
-####    Day2
+##   Day2
 
 Merge sort:
             class Solution {
@@ -94,7 +94,8 @@ Merge sort:
 };
 
 
-## DAY3  (Quick Sort)
+## DAY3  
+###(Quick Sort)
 
       class Solution {
   public:
@@ -140,3 +141,19 @@ Merge sort:
         return arr;
     }
 };
+###Largest number in an array
+class Solution {
+  public:
+    int largest(vector<int> &arr) {
+        // code here
+        int max = arr[0];
+        for (int i = 0;i<arr.size();i++){
+            if (max<arr[i]){
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+};
+
+
