@@ -93,3 +93,50 @@ Merge sort:
     }
 };
 
+
+## DAY3  (Quick Sort)
+
+      class Solution {
+  public:
+    // Function to sort an array using quick sort algorithm.
+    void quickSort(vector<int>& arr, int low, int high) {
+        // code here
+        if (low<high){
+            int part_index = partition(arr,low,high);
+            quickSort(arr,low,part_index-1);
+            quickSort(arr,part_index+1,high);
+        }
+    }
+
+  public:
+    // Function that takes last element as pivot, places the pivot element at
+    // its correct position in sorted array, and places all smaller elements
+    // to left of pivot and all greater elements to right of pivot.
+    int partition(vector<int>& arr, int low, int high) {
+        int pivot = arr[low];
+        // code here
+        int i = low;
+        int j = high;
+        while (i<=j){
+            while (arr[i]<=pivot && i<=high){
+                i++;
+            }
+            while (arr[j]>pivot && j>=low){
+                j--;
+            }
+            if (i<j){
+                int temp = arr[i];
+                arr[i]= arr[j];
+                arr[j]= temp;
+            }          
+        }
+        int temp = arr[low];
+        arr[low]= arr[j];
+        arr[j]= temp;
+        return j;
+    }    
+    vector<int> qs(vector<int>& arr){
+        quickSort(arr,0,arr.size()-1);
+        return arr;
+    }
+};
