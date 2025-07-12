@@ -17,6 +17,7 @@
       };
 
 ## Sort an array of 0s, 1s and 2s
+### Better Approach
 
     class Solution {
       public:
@@ -58,3 +59,25 @@
             mergeSort(arr,0,n-1);
         }
     };
+### Optimal Approach
+    class Solution {
+      public:
+          void sortColors(vector<int>& arr) {
+              int low,mid=0;  
+              int high = arr.size()-1;
+              while (mid<=high){
+                  if (arr[mid]==0){
+                      swap(arr[low],arr[mid]);
+                      low++;
+                      mid++;
+                  }
+                  else if (arr[mid]==1){
+                      mid++;
+                  }
+                  else{
+                      swap(arr[mid],arr[high]);
+                      high--;
+                  }
+              }    
+          }
+      };
