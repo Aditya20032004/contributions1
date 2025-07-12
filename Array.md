@@ -59,7 +59,7 @@
             mergeSort(arr,0,n-1);
         }
     };
-### Optimal Approach
+### Optimal Approach( Dutch National Flag Algorithm )
     class Solution {
       public:
           void sortColors(vector<int>& arr) {
