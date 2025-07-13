@@ -1,6 +1,6 @@
 # Day4
  ## 2sum problem
-  
+ ```cpp
     class Solution {
       public:
           vector<int> twoSum(vector<int>& arr,int target){
@@ -15,10 +15,10 @@
               return {-1,-1};
           }
       };
-
+```
 ## Sort an array of 0s, 1s and 2s
 ### Better Approach
-
+```cpp
     class Solution {
       public:
         void mergeSort(vector<int> &arr, int l, int r) {
@@ -59,7 +59,9 @@
             mergeSort(arr,0,n-1);
         }
     };
+ ```
 ### Optimal Approach( Dutch National Flag Algorithm )
+```cpp
     class Solution {
       public:
           void sortColors(vector<int>& arr) {
@@ -81,26 +83,31 @@
               }    
           }
       };
-
+```
 
 # Day 5
 ## Majority element occuring more than n/2
 ### Using Hashing (map)(Better Approach)
-    class Solution {
-    public:
-        int majorityElement(vector<int>& nums) {
-            map<int,int> mpp;
-            for (int i =0;i<nums.size();i++){
-                mpp[nums[i]]++;
-            }
-            for (auto it:mpp){
-                if (it.second>(nums.size()/2)){
-                    return (it.first);
-                }
-            }
-            return -1;        
+
+```cpp
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        map<int,int> mpp;
+        for (int i =0;i<nums.size();i++){
+            mpp[nums[i]]++;
         }
-    };
+        for (auto it:mpp){
+            if (it.second>(nums.size()/2)){
+                return (it.first);
+            }
+        }
+        return -1;        
+    }
+};
+```
+
 ### Optimal Approach Moore'S voting algoritm
   ```cpp
     class Solution {
@@ -126,4 +133,4 @@
             else return -1;  
         }      
     };
-'''
+```
