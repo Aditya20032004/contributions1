@@ -102,7 +102,7 @@
         }
     };
 ### Optimal Approach Moore'S voting algoritm
-
+    ```cpp
     class Solution {
     public:
         int majorityElement(vector<int>& nums) {
@@ -126,3 +126,4 @@
             else return -1;  
         }      
     };
+    '''
