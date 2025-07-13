@@ -134,3 +134,42 @@ public:
         }      
     };
 ```
+### Boyer-Moore's voting algorithm( 2 majority elements)
+```cpp
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int el1;
+        int c1 =0;
+        int el2;
+        int c2=0;
+        vector<int> arr;
+        for (int i=0;i<nums.size();i++){
+            if (nums[i]==el1) c1++;
+            else if (c2==0 && el1!=nums[i]){
+                el2=nums[i];
+                c2=1;
+            }
+            else if (c1==0 && el2!=nums[i]){
+                el1 = nums[i];
+                c1 = 1;
+            } 
+            else if (nums[i]==el2) c2++;
+            else c1--,c2--; 
+        }
+        c1=0;
+        c2=0;
+        for (int j =0;j<nums.size();j++){
+            if (nums[j]==el1) c1++;
+            else if (nums[j]==el2) c2++;
+        }        
+        if (c1>nums.size()/3){
+            arr.push_back(el1);
+        }
+        if (c2>nums.size()/3){
+            arr.push_back(el2);
+        }
+        return arr;
+    }
+};
+```
