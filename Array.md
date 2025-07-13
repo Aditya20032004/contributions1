@@ -81,3 +81,48 @@
               }    
           }
       };
+
+
+# Day 5
+## Majority element occuring more than n/2
+### Using Hashing (map)(Better Approach)
+    class Solution {
+    public:
+        int majorityElement(vector<int>& nums) {
+            map<int,int> mpp;
+            for (int i =0;i<nums.size();i++){
+                mpp[nums[i]]++;
+            }
+            for (auto it:mpp){
+                if (it.second>(nums.size()/2)){
+                    return (it.first);
+                }
+            }
+            return -1;        
+        }
+    };
+### Optimal Approach Moore'S voting algoritm
+
+    class Solution {
+    public:
+        int majorityElement(vector<int>& nums) {
+            int el;
+            int count = 0;
+            for (int i=0; i<nums.size();i++){
+                if (count == 0){
+                    el = nums[i];
+                    count = 1;
+                }
+                else if (nums[i]==el) count++;
+                else count--;
+            }
+            int x = 0;
+            for (int j=0;j<nums.size();j++){
+                if (nums[j]==el) x++;
+            }
+            if (x>nums.size()/2){
+                return el;
+            }
+            else return -1;  
+        }      
+    };
