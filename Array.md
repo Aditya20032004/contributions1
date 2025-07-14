@@ -194,7 +194,7 @@ public:
     }
 };
 ```
-### Kadane's Algorithm
+### Kadane's Algorithm(variant 1)
 ```cpp
 class Solution {
 public:
@@ -212,5 +212,92 @@ public:
         }
         return maxi;        
     }
+};
+```
+### Kadane's Algorithm(variant 2)
+```cpp
+// C++ Program to print subarray with maximum sum using nested loops 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to find the subarray with maximum sum
+vector<int> maxSumSubarray(vector<int> &arr) {
+    
+    // start and end of max sum subarray
+    int resStart = 0, resEnd = 0;
+  
+    // Initialize the maximum subarray sum with the first element
+    int maxSum = arr[0];
+
+    for (int i = 0; i < arr.size(); i++) {
+        
+        // Initialize current subarray sum with 0
+        int currSum = 0;
+        for(int j = i; j < arr.size(); j++) {
+            currSum += arr[j];
+            
+            // If current subarray has greater sum than maximum sum subarray,
+            // then update the start and end of maximum sum subarray
+            if(currSum > maxSum) {
+                maxSum = currSum;
+                resStart = i;
+              	resEnd = j;
+            }
+        }
+    }
+  
+    vector<int> res;
+    for(int i = resStart; i <= resEnd; i++)
+        res.push_back(arr[i]);
+    return res;
+}
+
+int main() {
+    vector<int> arr = {2, 3, -8, 7, -1, 2, 3};
+    vector<int> res = maxSumSubarray(arr);
+  
+    for(int i = 0; i < res.size(); i++)
+        cout << res[i] << " ";
+  
+    return 0;
+}
+```
+
+## STOCK(BUY & SELL)
+### Brute force
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& nums) {
+        int maxi = 0;
+        for (int i =0;i<nums.size();i++){
+            for(int j =i+1;j<nums.size();j++){
+                if (nums[i]<nums[j]){
+                    maxi = max(nums[j]-nums[i],maxi);
+                }
+            }
+        }
+        return maxi;     
+    }
+};
+```
+### Optimal Approach
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int> &arr) {
+    int maxPro = 0;
+    int minPrice = INT_MAX;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i]<minPrice){
+            minPrice = arr[i];
+        }
+        if (maxPro < (arr[i]-minPrice)){
+            maxPro = arr[i]-minPrice;
+        }
+    }
+    return maxPro;
+}
 };
 ```
