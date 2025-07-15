@@ -301,3 +301,35 @@ public:
 }
 };
 ```
+# Day 7
+## Rearrange array elements by sign
+### Optimal Approach(  Equal number of pos and neg )
+```cpp
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> arr(nums.size(),0);
+        int neg=1,pos=0;
+        for (int i =0;i<nums.size();i++){
+            if (nums[i]>0){
+                arr[pos]=nums[i];
+            }
+            else {
+                arr[neg]=nums[i];
+                neg +=2;
+            }
+        }
+        return arr;
+    }
+};
+```
+
+## Next Permuatation
+```cpp
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        next_permutation(nums.begin(),nums.end());
+    }
+};
+```
