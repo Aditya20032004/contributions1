@@ -409,3 +409,43 @@ public:
     }
 };
 ```
+## Set matrix zero
+### Brute force approach
+```cpp
+class Solution {
+public:
+    vector<vector<int>> setMatrixZeroes(vector<vector<int>>& matrix) {
+        for (int i=0;i<matrix[0].size();i++){
+            for (int j =0;j<matrix.size();j++){
+                if (matrix[i][j]==0){
+                    mark_row(matrix,matrix[0].size(),matrix.size(),i);
+                    mark_column(matrix,matrix[0].size(),matrix.size(),j);
+                }
+            }
+        }
+
+        for (int i=0;i<matrix[0].size();i++){
+            for (int j =0;j<matrix.size();j++){
+                if (matrix[i][j]==-1){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        return matrix;
+    }
+    void mark_row(vector<vector<int>>& matrix,int n, int m,int i){
+        for (int j=0;j<m;j++){
+            if (matrix[i][j]!=0){
+                matrix[i][j]=-1;
+            }
+        }
+    }
+    void mark_column(vector<vector<int>>& matrix,int n, int m, int i){
+        for (int j=0;j<n;j++){
+            if (matrix[j][i]!=0){
+                matrix[j][i]=-1;
+            }
+        }
+    }
+};
+```
