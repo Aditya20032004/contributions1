@@ -333,3 +333,79 @@ public:
     }
 };
 ```
+# Day 8
+## Leaders in an array(elements in greater than all elements on its right)
+```cpp
+vector<int> printLeaders(int arr[], int n) {
+
+  vector<int> ans;
+  
+ // Last element of an array is always a leader,
+ // push into ans array.
+ int max = arr[n - 1];
+ ans.push_back(arr[n-1]);
+
+  // Start checking from the end whether a number is greater
+  // than max no. from right, hence leader.
+  for (int i = n - 2; i >= 0; i--)
+    if (arr[i] > max) {
+      ans.push_back(arr[i]);
+      max = arr[i];
+    }
+
+  
+  return ans;
+}
+```
+
+## longest consecutive sequence in an array
+### Better approach
+```cpp
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int longest =1, count=0;
+        int last_smaller = INT_MIN;
+        sort(nums.begin(),nums.end());
+        if (nums.size()==0) return 0;
+        for (int i =0; i<nums.size();i++){
+            if (nums[i]-1==last_smaller){
+                count +=1;
+            }
+            else if (nums[i]!=last_smaller){
+                count = 1;
+            } 
+            last_smaller = nums[i];
+            longest = max(longest,count);
+        }
+        return longest;        
+    }
+    
+};
+```
+### optimal approach
+```cpp
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> st;
+        int longest = 0; // Initialize to 0 to handle empty input
+        if (nums.size() == 0) return 0;
+        for (int num : nums) {
+            st.insert(num);
+        }
+        for (auto it : st) {
+            if (st.find(it - 1) == st.end()) {
+                int count = 1;
+                int x = it;
+                while (st.find(x + 1) != st.end()) {
+                    count += 1;
+                    x = x + 1;
+                }
+                longest = max(longest, count);
+            }
+        }
+        return longest;
+    }
+};
+```
