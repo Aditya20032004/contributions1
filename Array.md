@@ -449,3 +449,33 @@ public:
     }
 };
 ```
+
+# Day 9
+## Set matrix Zeroes
+### Better approach  (2*(m*n))
+```cpp
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+        vector<bool> ar1(m,false);
+        vector<bool> ar2(n,false);
+        for (int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if (matrix[i][j]==0){
+                    ar1[i]=true;
+                    ar2[j]=true;
+                }
+            }
+        }
+        for (int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if (ar1[i]==true || ar2[j]==true){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+};
+```
