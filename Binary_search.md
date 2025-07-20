@@ -128,4 +128,30 @@ public:
     }
 };
 ```
+### Find Occurrences of an Element in an Array (O(n))
+```cpp
+class Solution {
+public:
+    vector<int> occurrencesOfElement(vector<int>& nums, vector<int>& queries, int x) {
+        vector<int> arr;
+        map<int,int> mpp;
+        int n = nums.size();
+        int m = queries.size();
+        int count = 0;
+        for (int i=0; i<n;i++){
+            if (nums[i]==x){
+                count ++;
+                mpp[count]=i;
+            }
+        }        
+        for (int i=0;i<m;i++){
+            if (mpp.find(queries[i])!=mpp.end()){
+                arr.push_back(mpp[queries[i]]);
+            }
+            else arr.push_back(-1);
+        }
+        return arr;
+    }
+};
+```
 
