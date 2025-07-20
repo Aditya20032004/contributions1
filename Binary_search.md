@@ -68,3 +68,64 @@ public:
     }
 };
 ```
+
+# DAY 12
+## First last occurence of element in an array( log(n) )
+### Brute force approach
+```
+start from back of an array and search for last.
+start from front in an array for first occurence.
+```
+### Optimal approach
+```cpp
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {        
+       int n = nums.size();
+       int a = searchfirst(nums,target,n);
+       int b = searchlast(nums,target,n);
+       vector<int> arr;
+       arr.push_back(a);
+       arr.push_back(b);
+       return arr;
+    }
+
+    int searchfirst(vector<int>& nums,int target,int n){
+        int low= 0, high = n-1;
+        int ans=-1;
+        while (low<=high){
+            int mid = (low+high)/2;
+            if (nums[mid]==target){
+                high = mid-1;
+                ans = mid;
+            }
+            else if (nums[mid]<target){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+    int searchlast(vector<int>& nums,int target,int n){
+        int low= 0, high = n-1;
+        int ans=-1;
+        while (low<=high){
+            int mid = (low+high)/2;
+            if (nums[mid]==target){
+                low = mid+1;
+                ans = mid;
+            }
+            else if (nums[mid]<target){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+};
+```
+
