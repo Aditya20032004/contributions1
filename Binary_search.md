@@ -229,7 +229,8 @@ public:
 ```
 
 # Day 14
-## Optimal Approach
+## Minimum in Rotated Sorted Array 
+### Optimal Approach
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
