@@ -262,3 +262,62 @@ int findMin(vector<int>& arr) {
 }
 
 ```
+
+# DAY 15
+## how many an array has been rotated or minimum in a rotated sorted array 
+### Brute force (O( n ))
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& arr) {
+        int ans = INT_MAX,index = -1;
+        for(int i=0;i<arr.size();i++){
+            if (arr[i]<ans){
+                ans = arr[i];
+                index = i;
+            }
+        }
+        return ans; //return index; 
+
+    }
+};
+```
+### Optimal Approach
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int n=nums.size();
+        int ans = INT_MAX;
+        int index = -1;
+        int low =0, high = n-1;
+        while (low<=high){
+            int mid = (low+high)/2;
+            if (nums[low]<=nums[high]){
+                if (nums[low]<ans){
+                    ans = nums[low];
+                    index =low;
+                }
+                break;
+            }
+            if (nums[low]<=nums[mid]){
+                if (nums[low]<ans){
+                    ans = nums[low];
+                    index = low;
+                }
+                low = mid+1;
+
+            }
+            else {
+                if (nums[mid]<ans){
+                    ans = nums[mid];
+                    index = mid;
+                }
+                high = mid-1;
+            }
+        }
+        return ans;    
+    }
+};
+```
+
