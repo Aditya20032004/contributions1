@@ -321,3 +321,99 @@ public:
 };
 ```
 
+# DAY 16
+## minimum elemnt in an sorted array
+### Brute force approach
+```cpp
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        if (n==1) return nums[0];
+        for (int i=0;i<n;i++){
+            if (i==0){
+                if (nums[i]!=nums[i+1]) return nums[i];
+            }
+            else if (i==n-1){
+                if (nums[i]!=nums[i-1]) return nums[i];
+            }
+            else {
+                if (nums[i]!=nums[i-1] && nums[i]!=nums[i+1]) return nums[i];
+            }
+        }
+        return -1;    
+    }
+};
+```
+
+### Better approach
+```cpp
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        if (n==1) return nums[0];
+        for (int i=0;i<n-1;i+=2){
+            if (nums[i]!=nums[i+1]){
+                return nums[i];
+            }
+        }
+        return nums[n-1];
+            
+    }
+};
+```
+### Optimal Approach( log( n ) ) 
+```cpp
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int low =1;
+        int n =nums.size();
+        int high = n-2;
+        if (n ==1) return nums[0];
+        if (nums[0]!=nums[1]) return nums[0];
+        if (nums[n-1]!= nums[n-2]) return nums[n-1];
+        while (low<=high){
+            int mid = (low+high)/2;
+            if (nums[mid]!=nums[mid-1] && nums[mid]!=nums[mid+1]) return nums[mid];
+            if ((mid%2==1 && nums[mid]==nums[mid-1]) || (mid%2==0 && nums[mid]==nums[mid+1])){
+                low = mid+1;
+            }
+            else high = mid-1;
+        }
+        return -1;        
+    }
+};
+```
+
+## Find peak in a sorted array
+### optimal Approach
+```cpp
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int low =1;
+        int n =nums.size();
+        int high =n-2;
+        int ans = INT_MIN;
+        int index;
+        if (n==1) return 0;
+        if (nums[n-1]>nums[n-2]) return n-1;
+        if (nums[0]>nums[1]) return 0;
+        while (low<=high){
+            int mid = (low+high)/2;
+            if (nums[mid]>nums[mid+1] && nums[mid]>nums[mid-1]){
+                if (ans<nums[mid]){
+                    return mid;
+                }
+            }
+            else if (nums[mid]>nums[mid-1]){
+                low = mid+1;
+            }
+            else high = mid-1;
+        }
+        return -1;
+    }
+};
+```
