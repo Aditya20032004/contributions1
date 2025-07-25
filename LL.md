@@ -257,3 +257,29 @@ int main() {
     return 0;
 }
 ```
+## removing an element in a list
+```cpp
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* temp = head;
+        ListNode* temp2 = head;
+        while (head!=NULL && head->val==val){
+            head = head->next;
+        }
+
+        while (temp!=NULL){
+            
+            if (temp->val==val){
+                temp2->next = temp->next;
+                temp = temp->next;
+            }
+            else{
+                temp2 =temp;
+                temp = temp->next;
+            }
+        }
+        return head;      
+    }
+};
+```
