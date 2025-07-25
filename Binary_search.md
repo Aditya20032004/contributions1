@@ -417,3 +417,33 @@ public:
     }
 };
 ```
+# Day 17
+## nth root of no. using Binary search
+### Optimal Approcah
+```cpp
+class Solution {
+  public:
+    int nthRoot(int n, int m) {
+        int low = 0;
+        int high = m;
+        int ans = -1;
+        while (low<=high){
+            int mid = (low+high)/2;
+            long x=1;
+            for (int i =0;i<n;i++){
+                x = x*mid;
+                if (x>m) break;
+            }
+            if (x==m) {
+                ans = mid;
+                break;
+            }
+            else if (x>m) high =mid-1;
+            else low = mid+1;
+        }
+        return ans;
+        // Code here.
+    }
+    
+};
+```
