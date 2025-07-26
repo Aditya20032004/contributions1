@@ -447,3 +447,81 @@ class Solution {
     
 };
 ```
+# DAY 18
+## Row with max 1's(without sort)
+### optimal approcah
+```cpp
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int count_max =0;
+        int index =0;
+        int n= mat[0].size();
+        int m= mat.size();
+        for (int i=0;i<m;i++){
+            int count =0;
+            count = n-row(mat[i],n,1);
+            if (count>count_max){
+                index =i;
+                count_max= count;
+            }
+        }
+        return {index,count_max};
+            
+            
+    }
+    int row(vector<int>& arr,int n, int x){
+        int low =0;
+        int high = n-1;
+        int ans=n;
+        while (low<=high){
+            int mid =(low+high)/2;
+            if (arr[mid]>=x){
+                ans =mid;
+                high =mid-1;
+            }
+            else low =mid+1;
+        }
+        return ans;
+    }
+};
+
+```
+
+### oprimal approcah with sorting
+```cpp
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int count_max =0;
+        int index =0;
+        int n= mat[0].size();
+        int m= mat.size();
+        for (int i=0;i<m;i++){
+            int count =0;
+            count = m-row(mat[i],n,1);
+            if (count>count_max){
+                index =i;
+                count_max= count;
+            }
+        }
+        return {index,count_max};
+            
+            
+    }
+    int row(vector<int>& arr,int n, int x){
+        int low =0;
+        int high = n-1;
+        int ans=n;
+        while (low<=high){
+            int mid =(low+high)/2;
+            if (arr[mid]>=x){
+                ans =mid;
+                high =mid-1;
+            }
+            else low =mid+1;
+        }
+        return ans;
+    }
+};
+```
