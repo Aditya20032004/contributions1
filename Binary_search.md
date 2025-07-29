@@ -627,3 +627,48 @@ public:
     }
 };
 ```
+
+# DAY 21
+## SEARCH peak in a 2d matrix
+### optimal approach
+```cpp
+class Solution {
+public:
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        int low = 0, high = n - 1;
+        
+        while (low <= high) {
+            int mid_col = low + (high - low) / 2;
+            
+            // Find max element in current column
+            int max_row = 0;
+            int max_val = INT_MIN;
+            for (int i = 0; i < m; i++) {
+                if (mat[i][mid_col] > max_val) {
+                    max_val = mat[i][mid_col];
+                    max_row = i;
+                }
+            }
+            
+            // Check left and right neighbors
+            bool isPeak = true;
+            if (mid_col > 0 && mat[max_row][mid_col] < mat[max_row][mid_col - 1]) {
+                isPeak = false;
+                high = mid_col - 1;
+            } 
+            else if (mid_col < n - 1 && mat[max_row][mid_col] < mat[max_row][mid_col + 1]) {
+                isPeak = false;
+                low = mid_col + 1;
+            }
+            
+            if (isPeak) {
+                return {max_row, mid_col};
+            }
+        }
+        
+        return {-1, -1}; // Should never reach here per problem constraints
+    }
+};
+```
