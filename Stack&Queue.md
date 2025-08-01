@@ -1,4 +1,4 @@
-# DAY 23
+# DAY 24
 ## Implementing stack using queue
 ### Optimal Approach
 ```cpp
