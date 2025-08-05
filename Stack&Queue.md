@@ -86,5 +86,32 @@ public:
     int getMin() {
         return st.top().second;
     }
+
+```
+## Next greater than element
+### Initial Approach
+```cpp
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums2) {
+        stack<int> st;
+        int n = nums2.size();
+        vector<int> v(n, -1); // Initialize with size n and default value -1
+        
+        for (int i = 2 * n - 1; i >= 0; i--) {
+            while (!st.empty() && st.top() <= nums2[i % n]) {
+                st.pop();
+            }
+            if (i < n) {
+                if (!st.empty()) {
+                    v[i] = st.top();
+                }
+            }
+            st.push(nums2[i % n]);
+        }
+        return v;
+    }
+};
+```
 };
 ```
