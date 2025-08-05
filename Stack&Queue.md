@@ -56,3 +56,35 @@ public:
     }
 };
 ```
+
+## Implement Min stack
+### 1st approach
+```cpp
+class MinStack {
+public:
+    MinStack() {        
+    }
+    stack<pair<int,int>> st;
+    
+    void push(int val) {
+        int m;
+        if (st.empty()) m = val;
+        else {
+            m = min(st.top().second,val);
+        }        
+        st.push({val,m});
+    }
+    
+    void pop() {
+        st.pop();        
+    }
+    
+    int top() {
+        return st.top().first;        
+    }
+    
+    int getMin() {
+        return st.top().second;
+    }
+};
+```
