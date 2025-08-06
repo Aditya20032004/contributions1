@@ -10,12 +10,12 @@ public:
         int left_max=0,right_max=0;
         while (l<=r){
             if (h[l]<=h[r]){
-                if (h[l]>=left_max) left_max = h[l];
+                if (h[l]>left_max) left_max = h[l];
                 else res+=(left_max-h[l]);
                 l++;
             }
             else{
-                if (h[r]>=right_max) right_max = h[r];
+                if (h[r]>right_max) right_max = h[r];
                 else res+=(right_max-h[r]);
                 r--;
             }
