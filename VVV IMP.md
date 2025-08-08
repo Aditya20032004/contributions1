@@ -24,3 +24,33 @@ public:
     }
 };
 ```
+# DAY 28
+## ASTEROID COLLISION
+### Optimal Approach
+```cpp
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& arr) {
+        stack<int> st;
+        int n= arr.size();
+        for (int i=0;i<n;i++){
+            if (arr[i]>0) st.push(arr[i]);
+            else{
+                while (!st.empty() && st.top()<abs(arr[i]) && st.top()>0) st.pop();
+                if (!st.empty() && st.top()==abs(arr[i])) st.pop();
+                else if (st.empty() || st.top()<0) st.push(arr[i]); 
+            }
+        }
+        vector<int> nums;
+        int x;
+        while (!st.empty()){
+            x=st.top();
+            st.pop();
+            nums.push_back(x);
+        }
+
+        reverse(nums.begin(),nums.end());
+        return nums;
+    }
+};
+```
