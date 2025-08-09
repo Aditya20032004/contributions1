@@ -81,4 +81,66 @@ public:
 
 ### Optimal Approach
 ```cpp
+class Solution {
+public:
+    long long subArrayRanges(vector<int>& nums) {
+        int n = nums.size();
+        stack<int> st;
+        vector<long long> minPrev(n, -1), minNext(n, n);
+        vector<long long> maxPrev(n, -1), maxNext(n, n);
+        
+        // Compute previous and next smaller elements (for minimums)
+        for (int i = 0; i < n; i++) {
+            while (!st.empty() && nums[st.top()] >= nums[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                minPrev[i] = st.top();
+            }
+            st.push(i);
+        }
+        
+        st = stack<int>(); // Reset stack for next pass
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.empty() && nums[st.top()] > nums[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                minNext[i] = st.top();
+            }
+            st.push(i);
+        }
+        
+        st = stack<int>(); // Reset stack for maximums
+        // Compute previous and next larger elements (for maximums)
+        for (int i = 0; i < n; i++) {
+            while (!st.empty() && nums[st.top()] <= nums[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                maxPrev[i] = st.top();
+            }
+            st.push(i);
+        }
+        
+        st = stack<int>(); // Reset stack for next pass
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.empty() && nums[st.top()] < nums[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                maxNext[i] = st.top();
+            }
+            st.push(i);
+        }
+        
+        long long sumMin = 0, sumMax = 0;
+        for (int i = 0; i < n; i++) {
+            sumMin += nums[i] * (i - minPrev[i]) * (minNext[i] - i);
+            sumMax += nums[i] * (i - maxPrev[i]) * (maxNext[i] - i);
+        }
+        
+        return sumMax - sumMin;
+    }
+};
 ```
