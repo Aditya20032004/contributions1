@@ -59,3 +59,28 @@ public:
     }
 };
 ```
+# Day 34
+## longest repeating character with rewplacement
+### Optimised Appoach
+```cpp
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int n=s.size();
+        int maxf=0;
+        int l=0;
+        int maxl=0;
+        map<char,int> mpp;
+        for (int r=0;r<n;r++){
+            mpp[s[r]]++;
+            maxf = max(maxf,mpp[s[r]]);
+            if ((r-l+1)-maxf > k){
+                mpp[s[l]]--;
+                l++;
+            }
+            else maxl=max(maxl,r-l+1);
+        }        
+        return maxl;
+    }
+};
+```
