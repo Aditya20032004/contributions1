@@ -127,3 +127,31 @@ public:
     }
 };
 ```
+
+# Day 38
+## Optimized Approach
+### Number of subarrays with K different integers
+```cpp
+class Solution {
+public:
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+        return freqcount(nums,k)-freqcount(nums,k-1);        
+    }
+    int freqcount(vector<int>& nums, int k ){
+        int l = 0,r = 0,count = 0;
+        unordered_map<int,int> mpp;
+        int n= nums.size();
+        while(r<n){
+            mpp[nums[r]]++;
+            while(mpp.size() > k){
+                mpp[nums[l]]--;
+                if (mpp[nums[l]] == 0) mpp.erase(nums[l]);
+                l++;
+            }
+            count += (r-l+1);
+            r++;
+        }       
+        return count;
+    }
+};
+```
