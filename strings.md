@@ -1,6 +1,6 @@
 # Day 41
 ## Remove Outermost Parentheses
-### OPtiized Approach
+### Optimized Approach
 ```cpp
 class Solution {
 public:
