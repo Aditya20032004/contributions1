@@ -15,3 +15,34 @@ public:
     }
 };
 ```
+
+# Day42
+##  Reverse Words in a String
+### Optimized Approach
+```cpp
+ class Solution {
+public:
+    string reverseWords(string s) {
+        string s1="",s2="";
+        int l=0,r =s.size()-1;
+        while (l<=r){
+            char ch=s[l];
+            if (ch!=' ') s1+=ch;
+            else {
+                if (s1!=""){
+                    if (s2!="") s2=s1+" "+s2;
+                    else s2=s1;
+                    s1="";
+                }
+            } 
+            l++;
+        }   
+        if (s1!=""){
+                if (s2!="") s2=s1+" "+s2;
+                else s2=s1;
+        }
+          
+        return s2;
+    }
+};
+```
