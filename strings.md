@@ -46,3 +46,22 @@ public:
     }
 };
 ```
+
+# Day43
+## Largest Odd Number in String(You are given a string num, representing a large integer. Return the largest-valued odd integer (as a string) that is a non-empty substring of num, or an empty string "" if no odd integer exists.)
+### Optimized Approach
+```cpp
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        int last=num.size();
+        while (last>=0){
+            if ((num[last]-'0')%2 !=0){
+                return num.substr(0,last+1);
+            }
+            last--;
+        }        
+        return "";
+    }
+};
+```
