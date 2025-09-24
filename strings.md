@@ -65,3 +65,25 @@ public:
     }
 };
 ```
+
+# Day 44
+## Write a function to find the longest common prefix string amongst an array of strings.
+### Optimal Approach
+```cpp
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        sort(strs.begin(),strs.end());
+        string first=strs[0];
+        string last=strs[strs.size()-1];
+        string res="";
+        int mini=min(first.size(),last.size());
+        for(int i=0;i<mini;i++){
+            if (first[i]!=last[i]) break;
+            res+=first[i];
+        }
+        return res;
+    }
+};
+
+```
