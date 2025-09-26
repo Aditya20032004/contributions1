@@ -105,3 +105,15 @@ public:
     }
 };
 ```
+
+# Day 47
+## Rotate String
+### Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+```cpp
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        return s.size()==goal.size() && (s+s).find(goal)!=string::npos;        
+    }
+};
+```
