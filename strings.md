@@ -138,3 +138,26 @@ public:
     }
 };
 ```
+
+# Day 49
+## Sort characters by frequency
+### Given a string s, sort it in decreasing order based on the frequency of the characters. The frequency of a character is the number of times it appears in the string.
+```cpp
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> mpp;
+        for (auto it:s) mpp[it]++;
+        vector<pair<char,int>> vec(mpp.begin(),mpp.end());
+        sort(vec.begin(),vec.end(),[](auto& a, auto& b){
+            return a.second>b.second || (a.second==b.second && a.first<b.first);
+        });
+
+        string res;
+        for (auto it:vec){
+            for(int i=0;i<it.second;i++) res+=it.first;
+        }
+        return res;
+    }
+};
+```
