@@ -161,3 +161,37 @@ public:
     }
 };
 ```
+
+# Day 50
+## Maximum Nesting Depth of the Parentheses
+```cpp
+class Solution {
+public:
+    int maxDepth(string s) {;
+        int count=0;
+        int res=0;
+        for (char c:s){
+            if (c=='(' ) count++;
+            if (c==')' ) count--;
+            res=max(count,res);
+        }        
+        return res;
+    }
+};
+```
+
+## Roman to Integer
+```cpp
+class Solution {
+public:
+    int romanToInt(string s) {
+        int res=0;
+        map<char,int> mpp={{'I',1},{'V',5},{'X',10},{'L',50},{'C',100},{'D',500},{'M',1000}};
+        for (int i=0;i<s.size();i++){
+            if (mpp[s[i]]<mpp[s[i+1]]) res-=mpp[s[i]];
+            else res+=mpp[s[i]];
+        }        
+        return res;
+    }
+};
+```
