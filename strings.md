@@ -48,7 +48,7 @@ public:
 ```
 
 # Day43
-## Largest Odd Number in String(You are given a string num, representing a large integer. Return the largest-valued odd integer (as a string) that is a non-empty substring of num, or an empty string "" if no odd integer exists.)
+### Largest Odd Number in String(You are given a string num, representing a large integer. Return the largest-valued odd integer (as a string) that is a non-empty substring of num, or an empty string "" if no odd integer exists.)
 ### Optimized Approach
 ```cpp
 class Solution {
@@ -67,7 +67,7 @@ public:
 ```
 
 # Day 44
-## Write a function to find the longest common prefix string amongst an array of strings.
+### Write a function to find the longest common prefix string amongst an array of strings.
 ### Optimal Approach
 ```cpp
 class Solution {
