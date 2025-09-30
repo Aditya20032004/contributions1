@@ -11,7 +11,7 @@ public:
 };
 ```
 
-## Dynamic Programming[https://leetcode.com/problems/unique-paths/submissions/1787400920/]
+### Dynamic Programming[https://leetcode.com/problems/unique-paths/submissions/1787400920/]
 ```cpp
 class Solution {
 public:
