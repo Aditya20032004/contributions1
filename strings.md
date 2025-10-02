@@ -234,3 +234,67 @@ public:
     }
 };
 ```
+
+# Day 52
+## Longest Palindromic Substring
+### [Brute force](https://leetcode.com/problems/longest-palindromic-substring/description/)
+```cpp
+**class Solution {
+public:
+    string longestPalindrome(string s) {        
+        string res ="";
+        int maxi=0;
+        if (s.size()==1) return s;
+        for (int i=0;i<s.size();i++){
+            for(int j=i;j<s.size();j++){
+                string ch=s.substr(i,j-i+1);
+                if (isplaindrome(ch) && ch.size()>res.size()) res=ch;
+            }
+        }
+        return res;
+    }
+    bool isplaindrome(string s){
+        int l=0,r=s.size()-1;
+        while (l<r){
+            if (s[l]!=s[r]) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+};
+```
+### [Optimised Approach](https://leetcode.com/problems/longest-palindromic-substring/description/)
+```cpp
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if (s.empty()) return "";
+        
+        int start = 0, maxLen = 1;
+        int n = s.size();
+        
+        for (int i = 0; i < n; i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            
+            int len = max(len1, len2);
+            if (len > maxLen) {
+                maxLen = len;
+                start = i - (len - 1) / 2;
+            }
+        }
+        
+        return s.substr(start, maxLen);
+    }
+    
+private:
+    int expandAroundCenter(string& s, int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+};
+```
