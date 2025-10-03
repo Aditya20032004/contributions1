@@ -301,7 +301,7 @@ private:
 
 # Day 53
 ## Sum of Beauty of All Substrings
-## Approach
+### Approach 1
 ```cpp
 class Solution {
 public:
@@ -317,6 +317,33 @@ public:
                 for(auto it:mpp){
                     mini=min(it.second,mini);
                     maxi=max(it.second,maxi);
+                }
+                sum+=(maxi-mini);
+            }
+        }              
+        return sum;  
+    }
+};
+```
+### Approach 2
+```cpp
+class Solution {
+public:
+    int beautySum(string s) {
+        int sum=0;
+        for (int i=0;i<s.size();i++){
+            unordered_map<char,int> mpp;
+            int arr[26]={0};
+            for (int j=i;j<s.size();j++){
+                arr[s[j]-'a']++;
+                int maxi=INT_MIN;
+                int mini=INT_MAX;
+
+                for(int k=0;k<26;k++){
+                    if (arr[k]>0){
+                        mini=min(arr[k],mini);
+                        maxi=max(arr[k],maxi);
+                    }
                 }
                 sum+=(maxi-mini);
             }
