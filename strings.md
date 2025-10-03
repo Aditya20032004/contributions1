@@ -17,7 +17,7 @@ public:
 ```
 
 # Day42
-##  Reverse Words in a String
+##  [Reverse Words in a String](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/submissions/1790377133/)
 ### Optimized Approach
 ```cpp
  class Solution {
