@@ -17,7 +17,7 @@ public:
 ```
 
 # Day42
-##  [Reverse Words in a String](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/submissions/1790377133/)
+##  [Reverse Words in a String]
 ### Optimized Approach
 ```cpp
  class Solution {
@@ -300,7 +300,7 @@ private:
 ```
 
 # Day 53
-## Sum of Beauty of All Substrings
+## [Sum of Beauty of All Substrings](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/submissions/1790377133/)
 ### Approach 1
 ```cpp
 class Solution {
