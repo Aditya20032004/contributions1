@@ -62,3 +62,24 @@ public:
     }
 };
 ```
+# Day 55
+## Generate Parentheses
+### [Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.](https://leetcode.com/problems/generate-parentheses/)    
+```cpp
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> str;
+        backtrack("",0,0,n,str);
+        return str;        
+    }
+    void backtrack(string curr,int open,int close,int n,vector<string>& str){
+        if (curr.length()==2*n){
+            str.push_back(curr);
+            return;
+        }
+        if (open<n) backtrack(curr+"(",open+1,close,n,str);
+        if (close<open) backtrack(curr+")",open,close+1,n,str);
+    }
+};
+```
