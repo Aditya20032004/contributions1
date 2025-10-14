@@ -85,8 +85,8 @@ public:
 ```
 
 # Day 56
-## Subsets
-### [Subsets
+## [Subsets](https://leetcode.com/problems/subsets/description/)
+### Subsets
 Solved
 Medium
 Topics
@@ -94,7 +94,7 @@ premium lock icon
 Companies
 Given an integer array nums of unique elements, return all possible subsets (the power set).
 
-The solution set must not contain duplicate subsets. Return the solution in any order.](https://leetcode.com/problems/subsets/description/)
+The solution set must not contain duplicate subsets. Return the solution in any order.
 ```cpp
 class Solution {
 public:
@@ -113,6 +113,35 @@ public:
         solve(i+1,nums,arr,res);
         arr.pop_back();
         solve(i+1,nums,arr,res);
+    }
+};
+```
+# Day 57
+## [Combination Sum](https://leetcode.com/problems/combination-sum/)
+### Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+```cpp
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> uni;
+        vector<int> res;
+        findcomb(0,target,candidates,res,uni);
+        return uni;        
+    }
+    void findcomb(int idx,int target,vector<int>& candidates,vector<int>& res,vector<vector<int>>& uni){
+        if (idx==candidates.size()){
+            if (target==0){
+                uni.push_back(res);
+            }
+            return;
+        }
+        if (candidates[idx]<=target){
+            res.push_back(candidates[idx]);
+            findcomb(idx,target-candidates[idx],candidates,res,uni);
+            res.pop_back();
+        }
+        findcomb(idx+1,target,candidates,res,uni);
+
     }
 };
 ```
