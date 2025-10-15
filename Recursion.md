@@ -145,3 +145,30 @@ public:
     }
 };
 ```
+## [Combination Sum II](https://leetcode.com/problems/combination-sum-ii/description/)
+#### Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+```cpp
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int> cur;
+        vector<vector<int>> res;
+        sort(candidates.begin(),candidates.end());
+        findcomb(0,target,candidates,cur,res);
+        return res;        
+    }
+    void findcomb(int idx,int target,vector<int>& candidates,vector<int>& cur,vector<vector<int>>& res){
+        if (target==0){
+            res.push_back(cur);
+            return;        
+        }
+        for(int i=idx;i<candidates.size();i++){
+            if (i>idx && candidates[i]==candidates[i-1]) continue;
+            if (candidates[i]>target) break;
+            cur.push_back(candidates[i]);
+            findcomb(i+1,target-candidates[i],candidates,cur,res);
+            cur.pop_back();
+        }
+    }
+};
+```
