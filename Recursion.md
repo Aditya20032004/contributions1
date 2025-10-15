@@ -172,3 +172,29 @@ public:
     }
 };
 ```
+
+# Day 58
+## [Subsets II](https://leetcode.com/problems/subsets-ii/description/)
+#### Given an integer array nums that may contain duplicates, return all possible subsets (the power set).The solution set must not contain duplicate subsets. Return the solution in any order.
+```cpp
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {      
+        vector<vector<int>> res;
+        vector<int> curr;
+        sort(nums.begin(),nums.end());
+        subsethelp(0,nums,curr,res);  
+        return res;
+    }
+
+    void subsethelp(int idx,vector<int>& nums,vector<int>& curr, vector<vector<int>>& res){
+        res.push_back(curr);
+        for(int i=idx;i<nums.size();i++){
+            if (i!=idx && nums[i-1]==nums[i]) continue;
+            curr.push_back(nums[i]);
+            subsethelp(i+1,nums,curr,res);
+            curr.pop_back();
+        }
+    }
+};
+```
