@@ -224,6 +224,32 @@ public:
                 sumhelp(sum-i,i+1,curr,k,res);
                 curr.pop_back();
             }
+```
+# Day 60
+## [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
+#### Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+```cpp
+    class Solution {
+    public:
+        vector<string> letterCombinations(string digits) {
+            string combos[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+            string s="";
+            vector<string> ans;
+            digitscal(0,digits,s,ans,combos);
+            return ans;        
+        }
+        void digitscal(int idx,string digits,string s,vector<string>& ans,string combos[]){
+            if (idx==digits.size()){
+                ans.push_back(s);
+                return;
+            }
+            int digit = digits[idx]-'0';
+            for (int i=0;i<combos[digit].size();i++){
+                digitscal(idx+1,digits,s+combos[digit][i],ans,combos);            
+            }
+        }
+    };
+```
             else break;
         }
     }
