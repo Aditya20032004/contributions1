@@ -224,6 +224,10 @@ public:
                 sumhelp(sum-i,i+1,curr,k,res);
                 curr.pop_back();
             }
+            else break;
+        }
+    }
+};
 ```
 # Day 60
 ## [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
@@ -250,7 +254,38 @@ public:
         }
     };
 ```
-            else break;
+
+# Day 61
+## [Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)
+#### Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
+```cpp
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> res;
+        vector<string> curr;
+        pushing(0,s,curr,res);
+        return res;        
+    }
+    bool isPalind(string& s,int start,int end){
+        while (start<end){
+            if (s[start]!=s[end]) return false;
+            start++;
+            end--;
+        }
+        return true;
+    }
+    void pushing(int idx, string& s,vector<string>& curr, vector<vector<string>>& res){
+        if (s.length()==idx){
+            res.push_back(curr);
+            return;
+        }
+        for(int i=idx;i<s.length();i++){
+            if (isPalind(s,idx,i)){
+                curr.push_back(s.substr(idx,i-idx+1));
+                pushing(i+1,s,curr,res);
+                curr.pop_back();
+            }
         }
     }
 };
