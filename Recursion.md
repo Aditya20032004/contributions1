@@ -290,3 +290,47 @@ public:
     }
 };
 ```
+# Day 62
+## [Word Search](https://leetcode.com/problems/word-search/description/)
+#### Given an m x n grid of characters board and a string word, return true if word exists in the grid.The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+```cpp
+class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int row=board.size();
+        int col=board[0].size();
+        int idx=0;
+        for (int i=0;i<row;i++){
+            for (int j=0;j<col;j++){
+                if (board[i][j]==word[idx]){
+                    if (check(idx,i,j,board,word,row,col)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+        
+    }
+    bool check(int idx,int i, int j, vector<vector<char>>& board, string& word,int row, int col){
+        if (idx==word.length()) return true;
+        if (i<0 || j<0 || i==row || j==col || board[i][j]=='!' or board[i][j]!= word[idx]) return false;
+
+        char c=board[i][j];
+        board[i][j]='!';
+
+        bool top = check(idx+1,i-1,j, board,  word,row,col);
+        bool bottom = check(idx+1,i+1,j, board,  word,row,col);
+        bool left = check(idx+1,i,j-1, board,  word,row,col);
+        bool right = check(idx+1,i,j+1, board,  word,row,col);
+
+        board[i][j]=c;
+
+        return top||bottom||left||right;
+    }
+};
+
+```
+ 
+
+
