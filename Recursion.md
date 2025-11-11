@@ -331,6 +331,43 @@ public:
 };
 
 ```
- 
+
+# Day 65
+## N-Queens
+#### The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+ ```cpp
+class Solution {
+public:
+    void solve(int row,int n, vector<string>& board, vector<int>& cds, unordered_set<int>& posdiag, unordered_set<int>& negdiag, vector<vector<string>>& res){
+        if (row==n){
+            res.push_back(board);
+            return;
+        }
+        for (int c=0;c<n;c++){
+            if (posdiag.find(row+c)==posdiag.end() && negdiag.find(row-c)==negdiag.end() && cds[c]==0){
+                board[row][c]='Q';
+                cds[c]=1;
+                posdiag.insert(row+c);
+                negdiag.insert(row-c);
+                solve(row+1,n,board,cds,posdiag,negdiag,res);
+                board[row][c]='.';
+                cds[c]=0;
+                posdiag.erase(row+c);
+                negdiag.erase(row-c);
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> board(n,string(n,'.'));
+        vector<vector<string>> res;
+        unordered_set<int> posdiag;
+        unordered_set<int> negdiag;
+        vector<int> cds(n,0);
+        solve(0,n,board,cds,posdiag,negdiag,res);
+        return res;        
+    }
+};
+```
 
 
