@@ -63,3 +63,40 @@ public:
 };
 
 ```
+
+# Day 71
+## [Task Scheduler](https://leetcode.com/problems/task-scheduler/description/)
+#### You are given an array of CPU tasks, each labeled with a letter from A to Z, and a number n. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order, but there's a constraint: there has to be a gap of at least n intervals between two tasks with the same label.Return the minimum number of CPU intervals required to complete all tasks.
+```cpp
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int> mpp(26,0);
+        for (char c:tasks){
+            mpp[c-'A']++;
+        }        
+        priority_queue<int> pq;
+        for (int f:mpp){
+            if (f>0) pq.push(f);
+        }
+        queue<pair<int,int>> q;
+        int time = 0;
+        while (!pq.empty() || !q.empty()){
+            time++;
+            if (!q.empty() && q.front().second<time){
+                pq.push(q.front().first);
+                q.pop();
+            }
+            if (!pq.empty()){
+                int count = pq.top();
+                pq.pop();
+                count--;
+                if (count>0){
+                    q.push({count,time+n});
+                }
+            }   
+        }
+        return time;
+    }
+};
+```
