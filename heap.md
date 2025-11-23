@@ -186,3 +186,27 @@ public:
  * int param_1 = obj->add(val);
  */
 ```
+# Day 73
+## [K most frequent elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
+#### Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.[ 0(n) ]
+```cpp
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int> mpp;
+        for(int i:nums) mpp[i]++;
+        vector<vector<int>> bucket(nums.size()+1);
+        for(auto& i:mpp){
+            bucket[i.second].push_back(i.first);
+        }        
+        vector<int> res;
+        for(int j=bucket.size()-1;j>=0;--j){
+            for(int i:bucket[j]){
+                res.push_back(i);
+                if (res.size()==k) return res;
+            }
+        }
+        return res;
+    }
+};
+```
