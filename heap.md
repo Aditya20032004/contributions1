@@ -186,7 +186,7 @@ public:
  * int param_1 = obj->add(val);
  */
 ```
-# Day 73
+# Day 74
 ## [K most frequent elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
 #### Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.[ 0(n) ]
 ```cpp
