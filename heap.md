@@ -210,3 +210,37 @@ public:
     }
 };
 ```
+# Day 76
+## [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
+#### The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value, and the median is the mean of the two middle values.
+```cpp
+class MedianFinder {
+public:
+    priority_queue<int> maxheap;
+    priority_queue<int,vector<int>,greater<int>> minheap;  
+    MedianFinder() {
+              
+    }
+    void addNum(int num) {
+        maxheap.push(num);
+        minheap.push(maxheap.top());
+        maxheap.pop();
+        if(maxheap.size()<minheap.size()){
+            maxheap.push(minheap.top());
+            minheap.pop();
+        }        
+    }
+    
+    double findMedian() {
+        if(maxheap.size()==minheap.size()) return ((maxheap.top()+minheap.top())/2.0);
+        return maxheap.top();
+    }
+};
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
+```
