@@ -81,3 +81,26 @@ public:
     }
 };
 ```
+# Day 82
+## [Count Odd Numbers in an Interval Range](https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/description/?envType=daily-question&envId=2025-12-07)
+#### Given two non-negative integers low and high. Return the count of odd numbers between low and high (inclusive).
+```cpp
+class Solution {
+public:
+    int countOdds(int low, int high) {
+        int count =0;
+        for(int i=low;i<=high;i++){
+            if (i%2!=0) count++;
+        }        
+        return count;
+    }
+};
+```
+```cpp
+class Solution {
+public:
+    int countOdds(int low, int high) {
+        return ((high+1)/2 - (low/2));        
+    }
+};
+```
