@@ -104,3 +104,24 @@ public:
     }
 };
 ```
+
+# Day 83
+## [Count Square Sum Triples](https://leetcode.com/problems/count-square-sum-triples/description/?envType=daily-question&envId=2025-12-08)
+#### A square triple (a,b,c) is a triple where a, b, and c are integers and a2 + b2 = c2.Given an integer n, return the number of square triples such that 1 <= a, b, c <= n.
+```cpp
+class Solution {
+public:
+    int countTriples(int n) {
+        int count =0 ;
+        for(int a=1;a<n;a++){
+            for(int b= a+1;b<n;b++){
+                double c= sqrt(a*a+ b*b);
+                if(c<=n && c==(int)c) count+=2;
+            }
+        }
+        return count;
+        
+    }
+};
+
+```
