@@ -125,3 +125,45 @@ public:
 };
 
 ```
+# Day 84
+## [Count Special Triplets](https://leetcode.com/problems/count-special-triplets/description/?envType=daily-question&envId=2025-12-09)
+#### You are given an integer array nums.A special triplet is defined as a triplet of indices (i, j, k) such that:
+```cpp
+class Solution {
+public:
+    int specialTriplets(vector<int>& nums) {
+        int mod = 1e9+7;
+        unordered_map<int,long long> mppl,mppr;
+        for(int i:nums) mppr[i]++;       
+        long long ans=0;
+        for(int i=0;i<nums.size();i++){
+            int mid = nums[i];
+            int need = mid*2;
+            mppr[mid]--;
+            ans = (ans+(mppl[need]*mppr[need])%mod)%mod;
+            mppl[mid]++;
+        }
+        return ans;
+    }
+};
+```
+```cpp
+const int mod=1e9+7;
+class Solution {
+public:
+    int specialTriplets(vector<int>& nums) {
+        const int M=100001, n=nums.size();
+        int freq[M]={0}, prev[M]={0};
+        for(int x: nums) freq[x]++;
+        long long cnt=0;
+        prev[nums[0]]++;
+        for(int i=1; i<n-1; i++){
+            const int x=nums[i], x2=x<<1;
+            if (x2<M)
+                cnt+=(long long)prev[x2]*(freq[x2]-prev[x2]-(x==0));
+            prev[x]++;
+        }
+        return cnt%mod;
+    }
+};
+```
