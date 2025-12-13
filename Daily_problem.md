@@ -167,3 +167,46 @@ public:
     }
 };
 ```
+
+# Day 87
+## [Coupon Cdoe Validator](https://leetcode.com/problems/coupon-code-validator/description/?envType=daily-question&envId=2025-12-13)
+#### You are given three arrays of length n that describe the properties of n coupons: code, businessLine, and isActive. The ith coupon has:
+code[i]: a string representing the coupon identifier.businessLine[i]: a string denoting the business category of the coupon.
+isActive[i]: a boolean indicating whether the coupon is currently active.A coupon is considered valid if all of the following conditions hold:code[i] is non-empty and consists only of alphanumeric characters (a-z, A-Z, 0-9) and underscores (_).businessLine[i] is one of the following four categories: "electronics", "grocery", "pharmacy", "restaurant".isActive[i] is true.Return an array of the codes of all valid coupons, sorted first by their businessLine in the order: "electronics", "grocery", "pharmacy", "restaurant", and then by code in lexicographical (ascending) order within each category.
+```cpp
+class Solution {
+public:
+    vector<string> validateCoupons(vector<string>& code, vector<string>& businessLine, vector<bool>& isActive) {
+        vector<string> e1,g1,p1,r1;
+        for(int i=0;i<code.size();i++){
+            if (!isActive[i]) continue; /* Active or not **/
+            string& bl = businessLine[i];
+            if(bl!="electronics" && bl!="grocery" && bl!="pharmacy" && bl!="restaurant") continue;
+            if(code[i].empty()) continue;
+            bool ok = true;
+            for(char c:code[i]){
+                if(!isalnum(c) && c!='_'){
+                    ok = false;
+                    break;
+                }  
+            }
+            if(!ok) continue;
+            if(bl[0]=='e') e1.push_back(code[i]);
+            if(bl[0]=='g') g1.push_back(code[i]);
+            if(bl[0]=='p') p1.push_back(code[i]);
+            if(bl[0]=='r') r1.push_back(code[i]);            
+        }
+        sort(e1.begin(),e1.end());
+        sort(g1.begin(),g1.end());
+        sort(p1.begin(),p1.end());
+        sort(r1.begin(),r1.end());
+        vector<string> res;
+        res.insert(res.end(),e1.begin(),e1.end());
+        res.insert(res.end(),g1.begin(),g1.end());
+        res.insert(res.end(),p1.begin(),p1.end());
+        res.insert(res.end(),r1.begin(),r1.end());
+        return res;        
+    }
+};
+
+```
