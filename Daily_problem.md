@@ -210,3 +210,22 @@ public:
 };
 
 ```
+
+# Day 88
+## [Number of Smooth Descent Periods of a Stock](https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/submissions/1856292032/?envType=daily-question&envId=2025-12-15)
+#### You are given an integer array prices representing the daily price history of a stock, where prices[i] is the stock price on the ith day.A smooth descent period of a stock consists of one or more contiguous days such that the price on each day is lower than the price on the preceding day by exactly 1. The first day of the period is exempted from this rule.Return the number of smooth descent periods.
+```cpp
+class Solution {
+public:
+    long long getDescentPeriods(vector<int>& prices) {
+        long long ans = 1;
+        long long curr = 1;
+        for(int i=1;i<prices.size();i++){
+            if(prices[i]==(prices[i-1]-1)) curr++;
+            else curr=1;
+            ans+=curr;
+        }        
+        return ans;
+    }
+};
+```
