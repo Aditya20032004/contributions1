@@ -229,3 +229,40 @@ public:
     }
 };
 ```
+
+# Day 90
+## [Buy and sell stock V](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-v/description/?envType=daily-question&envId=2025-12-17)
+#### You are given an integer array prices where prices[i] is the price of a stock in dollars on the ith day, and an integer k.You are allowed to make at most k transactions, where each transaction can be either of the following:Normal transaction: Buy on day i, then sell on a later day j where i < j. You profit prices[j] - prices[i].Short selling transaction: Sell on day i, then buy back on a later day j where i < j. You profit prices[i] - prices[j].Note that you must complete each transaction before starting another. Additionally, you can't buy or sell on the same day you are selling or buying back as part of a previous transaction.Return the maximum total profit you can earn by making at most k transactions.
+```cpp
+class Solution {
+public:
+    long long maximumProfit(vector<int>& prices, int K) {
+        int n = prices.size();
+        static long long t[1001][501][3]; 
+        for(int k=0;k<=K;k++){
+            t[n][k][0] = 0;
+            t[n][k][1] = INT_MIN;
+            t[n][k][2] = INT_MIN;
+        }        
+        for(int i=n-1;i>=0;i--){
+            for(int k=0;k<=K;k++){
+                t[i][k][0] = t[i+1][k][0];
+                if(k>0){
+                    t[i][k][0] = max(t[i][k][0], max(-prices[i]+t[i+1][k][1], prices[i]+t[i+1][k][2]));
+                    t[i][k][1] = max(t[i][k][1], prices[i] + t[i+1][k-1][0]);
+                    t[i][k][2] = max(t[i][k][2],-prices[i] + t[i+1][k-1][0]);
+                }
+                t[i][k][1] = t[i+1][k][1];
+                if(k>0){
+                    t[i][k][1] = max(t[i][k][1], prices[i] + t[i+1][k-1][0]);
+                }
+                t[i][k][2] = t[i+1][k][2];
+                if(k>0){
+                    t[i][k][2] = max(t[i][k][2], -prices[i] + t[i+1][k-1][0]);
+                }
+            }
+        }
+        return t[0][K][0];
+    }
+};
+```
