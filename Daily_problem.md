@@ -266,3 +266,39 @@ public:
     }
 };
 ```
+# Day 91
+## [Buy an Sell Stock VI](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-using-strategy/description/?envType=daily-question&envId=2025-12-18)
+#### You are given two integer arrays prices and strategy, where:prices[i] is the price of a given stock on the ith day.strategy[i] represents a trading action on the ith day, where:-1 indicates buying one unit of the stock.0 indicates holding the stock.1 indicates selling one unit of the stock.You are also given an even integer k, and may perform at most one modification to strategy. A modification consists of:Selecting exactly k consecutive elements in strategy.Set the first k / 2 elements to 0 (hold).Set the last k / 2 elements to 1 (sell).The profit is defined as the sum of strategy[i] * prices[i] across all days.Return the maximum possible profit you can achieve.Note: There are no constraints on budget or stock ownership, so all buy and sell operations are feasible regardless of past actions.
+```cpp
+class Solution {
+public:
+    typedef long long ll;
+    ll maxProfit(vector<int>& prices, vector<int>& strategy, int k) {
+        int n = prices.size();
+        vector<ll> profit(n);
+        ll actualprofit = 0;
+        for(int i=0;i<n;i++){
+            profit[i] = prices[i]*strategy[i];
+            actualprofit+=profit[i];
+        }
+        ll modprof=0,origprof=0,maxgain=0;
+        int i=0,j=0;
+        while(j<n){
+            origprof+=profit[j];
+            if((j-i+1)>k/2){
+                modprof+=prices[j];
+            }
+            if((j-i+1)>k){
+                origprof-=profit[i];
+                modprof-=prices[i+k/2];
+                i++;
+            }            
+            if((j-i+1)==k){
+                maxgain = max(maxgain,modprof-origprof);
+            }
+            j++;
+        }
+        return actualprofit+maxgain;
+    }
+};
+```
