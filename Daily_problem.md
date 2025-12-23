@@ -329,3 +329,43 @@ public:
     }
 };
 ```
+# Day 94
+## [Two Best Non Overlapping events](https://leetcode.com/problems/two-best-non-overlapping-events/description/?envType=daily-question&envId=2025-12-23)
+#### You are given a 0-indexed 2D integer array of events where events[i] = [startTimei, endTimei, valuei]. The ith event starts at startTimei and ends at endTimei, and if you attend this event, you will receive a value of valuei. You can choose at most two non-overlapping events to attend such that the sum of their values is maximized.Return this maximum sum.Note that the start time and end time is inclusive: that is, you cannot attend two events where one of them starts and the other ends at the same time. More specifically, if you attend an event with end time t, the next event must start at o
+```cpp
+class Solution {
+public:
+    int maxTwoEvents(vector<vector<int>>& events) {
+        /* input the value in maxSuffix array **/
+        int n = events.size();
+        sort(events.begin(),events.end());
+        vector<int> maxSuf(n);            
+        maxSuf[n-1] = events[n-1][2];
+        for(int i=0;i<n-2;i++){
+            maxSuf[i] = max(maxSuf[i+1], events[i][2]);
+        }    
+        int ans =0;
+        /* now doing binary search */
+        for(int i=0;i<n;i++){
+            int currvalue =events[i][2];
+            ans = max(ans,currvalue);
+            int nextstart = events[i][1]+1;
+            int l=i+1,r =n-1,idx =-1;
+            while(l<=r){
+                int mid =(r+l)/2;
+                if(events[i][0]>=nextstart){
+                    idx=mid;
+                    r = mid-1;
+                }
+                else{
+                    l = mid+1;
+                }
+            }
+            if(idx!=-1){
+                ans = max(ans,currvalue+maxSuf[idx]);
+            }
+        }
+        return ans;
+    }
+};
+```
