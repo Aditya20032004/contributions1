@@ -407,3 +407,55 @@ public:
     }
 };
 ```
+# Day 98
+## [Last Day Where You Can Still Cross](https://leetcode.com/problems/last-day-where-you-can-still-cross/description/?envType=daily-question&envId=2025-12-31)
+#### There is a 1-based binary matrix where 0 represents land and 1 represents water. You are given integers row and col representing the number of rows and columns in the matrix, respectively.Initially on day 0, the entire matrix is land. However, each day a new cell becomes flooded with water. You are given a 1-based 2D array cells, where cells[i] = [ri, ci] represents that on the ith day, the cell on the rith row and cith column (1-based coordinates) will be covered with water (i.e., changed to 1).You want to find the last day that it is possible to walk from the top to the bottom by only walking on land cells. You can start from any cell in the top row and end at any cell in the bottom row. You can only travel in the four cardinal directions (left, right, up, and down).Return the last day where it is possible to walk from the top to the bottom by only walking on land cells.
+```cpp
+class Solution {
+public:
+    int ROW;
+    int COL;
+    vector<vector<int>> dir{{1,0},{0,1},{-1,0},{0,-1}};
+    bool DFS(vector<vector<int>>& grid,int i,int j){
+        if(i<0 || j<0 || i>=ROW || j>=COL || grid[i][j]==1) return false;
+        if(i==ROW-1) return true;
+        grid[i][j]=1;
+        for(auto &d:dir){
+            int new_i=d[0]+i;
+            int new_j=d[1]+j;
+            if(DFS(grid,new_i,new_j)) return true;
+        }
+        return false;
+    }
+    bool cancross(vector<vector<int>>& cells,int mid){
+        vector<vector<int>> grid(ROW,vector<int>(COL));
+        for(int i=0;i<mid;i++){
+            int x = cells[i][0]-1;
+            int y=cells[i][1]-1;
+            grid[x][y]=1;
+        }
+        for(int j=0;j<COL;j++){
+            if(grid[0][j]==0 && DFS(grid,0,j)){
+                return true;
+            }
+        }
+        return false;
+    }
+    int latestDayToCross(int row, int col, vector<vector<int>>& cells) {
+        ROW=row;
+        COL=col;
+        int l=1;
+        int r=cells.size()-1;
+        int lastday=0;
+        while(l<=r){
+            int mid = l+(r-l)/2;
+            if(cancross(cells,mid)){
+                l=mid+1;
+                lastday=mid;
+            }
+            else r=mid-1;
+        }
+        return lastday;
+    }
+};
+```
