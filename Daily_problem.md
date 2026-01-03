@@ -459,3 +459,24 @@ public:
     }
 };
 ```
+
+# Day 99
+## [Number of Ways to Paint N × 3 Grid](https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/?envType=daily-question&envId=2026-01-03)
+#### You have a grid of size n x 3 and you want to paint each cell of the grid with exactly one of the three colors: Red, Yellow, or Green while making sure that no two adjacent cells have the same color (i.e., no two cells that share vertical or horizontal sides have the same color).Given n the number of rows of the grid, return the number of ways you can paint this grid. As the answer may grow large, the answer must be computed modulo 109 + 7.
+```cpp
+class Solution {
+public:
+    int numOfWays(int n) {
+        long long A = 6;
+        long long B = 6;
+        long long MOD = 1e9+7;
+        for(int i=2;i<=n;i++){
+            int newA=(2*A+2*B)%MOD;
+            int newB=(2*A+3*B)%MOD;
+            A=newA;
+            B=newB;
+        }        
+        return (A+B)%MOD;
+    }
+};
+```
