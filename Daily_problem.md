@@ -480,3 +480,34 @@ public:
     }
 };
 ```
+
+# Day 100
+## [Four Divisors](https://leetcode.com/problems/four-divisors/description/?envType=daily-question&envId=2026-01-04)
+#### Given an integer array nums, return the sum of divisors of the integers in that array that have exactly four divisors. If there is no such integer in the array, return 0.
+```cpp
+class Solution {
+public:
+    int sumFourDivisors(vector<int>& nums) {
+        int div_sum=0;
+        for(int i:nums){
+            int div_count=0,in_sum=0;
+            for(int j=1;j*j<=i;j++){
+                if(i%j==0){
+                    int new_n = i/j;
+                    if(new_n==j){
+                        div_count++;
+                        in_sum+= j;
+                    }
+                    else{
+                        div_count+=2;
+                        in_sum+=(j+new_n);
+                    }
+                    if(div_count>4) break;
+                }  
+            }
+            if (div_count==4) div_sum+=in_sum;       
+        }   
+        return div_sum;     
+    }
+};
+```
