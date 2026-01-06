@@ -534,3 +534,46 @@ public:
     }
 };
 ```
+# Day 102
+## [Maximum Level Sum of a Binary Tree](https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/description/?envType=daily-question&envId=2026-01-06)
+#### Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.Return the smallest level x such that the sum of all the values of nodes at level x is maximal.
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int maxLevelSum(TreeNode* root) {
+        if(!root) return 0;
+        long long maxi=-1e18;
+        int cl=1,ans=1;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            long long currsum=0;
+            for(int i=0;i<size;i++){
+                TreeNode* n=q.front();
+                q.pop();
+                currsum += n->val;
+                if(n->left) q.push(n->left);
+                if(n->right) q.push(n->right);
+            }
+            if(maxi<currsum){
+                maxi = currsum;
+                ans=cl;
+            }
+            cl++;
+        }
+        return ans;        
+    }
+};
+```
