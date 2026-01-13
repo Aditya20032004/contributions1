@@ -633,3 +633,44 @@ public:
     }
 };
 ```
+# Day 106
+## [Separate Squares I](https://leetcode.com/problems/separate-squares-i/description/?envType=daily-question&envId=2026-01-13)
+#### You are given a 2D integer array squares. Each squares[i] = [xi, yi, li] represents the coordinates of the bottom-left point and the side length of a square parallel to the x-axis.Find the minimum y-coordinate value of a horizontal line such that the total area of the squares above the line equals the total area of the squares below the line.Answers within 10-5 of the actual answer will be accepted.Note: Squares may overlap. Overlapping areas should be counted multiple times.
+```cpp
+class Solution {
+public:
+    bool check(vector<vector<int>>& squares,double mid_y, double total){
+        double bot_area = 0;
+        for(auto &i:squares){
+            double y = i[1];
+            double l = i[2];
+            double boty = y;
+            double topy = y+l;
+            if(mid_y>=topy) bot_area += l*l;
+            else if(mid_y>boty) bot_area += (mid_y-boty)*l;
+        }        
+        return bot_area>=total/2.0;
+    }
+    double separateSquares(vector<vector<int>>& squares) {
+        double low = INT_MAX;
+        double high = INT_MIN;
+        double total = 0.00000;
+        for(auto &i:squares){
+            double x =i[0];
+            double y =i[1];
+            double l =i[2];
+            total += l*l;
+            low = min(low,y);
+            high = max(high,y+l);
+        }
+        double result_y = 0.00000;
+        while(abs(low-high)>1e-5){
+            double mid_y = (low+high)/2;
+            result_y = mid_y;
+            if(check(squares,mid_y,total)) high = mid_y;
+            else low = mid_y;
+        }
+        return result_y;
+    }
+};
+```
