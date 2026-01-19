@@ -751,3 +751,45 @@ public:
     }
 };
 ```
+
+# Day 109
+## [1292. Maximum Side Length of a Square with Sum Less than or Equal to Threshold](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/description/?envType=daily-question&envId=2026-01-19)
+#### Given a m x n matrix mat and an integer threshold, return the maximum side-length of a square with a sum less than or equal to threshold or return 0 if there is no such square.
+```cpp
+class Solution {
+public:
+    bool isvalid(vector<vector<int>>& pref,int k,int t){
+        for(int i=k-1;i<pref.size();i++){
+            for(int j=k-1;j<pref[0].size();j++){
+                int x1=i-k+1;
+                int y1=j-k+1;
+                int sum = pref[i][j]-(x1>0?pref[x1-1][j]:0)-(y1>0?pref[i][y1-1]:0)+(x1>0 && y1>0?pref[x1-1][y1-1]:0);
+                if(sum<=t) return true;
+            }
+        }
+        return false;
+    }
+    int maxSideLength(vector<vector<int>>& mat, int threshold) {
+        vector<vector<int>> pref = mat;
+        int m=mat.size();
+        int n=mat[0].size();
+        for(int i=0;i<m;i++){
+            for(int j=1;j<n;j++) pref[i][j]+=pref[i][j-1];
+        }    
+        for(int j=0;j<n;j++){
+            for(int i=1;i<m;i++) pref[i][j]+=pref[i-1][j];
+        }    
+        int ans = 0;
+        int l=1,r=min(m,n);
+        while(l<=r){
+            int mid=(l+r)/2;
+            if(isvalid(pref,mid,threshold)){
+                ans=mid;
+                l = mid+1;
+            }
+            else r = mid-1;
+        }
+        return ans;
+    }
+};
+```
